@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '../network/dio_client.dart';
 
 abstract class AuthImp {
@@ -31,9 +33,11 @@ class Auth implements AuthImp {
     required String clientSecret,
     required String redirectUri,
     required String code,
+    String? baseUrl,
     String grantType = "authorization_code",
   }) async {
-    final data = await _dioClient.post("/oauth/token", queryParameters: {
+    final data = await _dioClient
+        .post("/oauth/token", baseUrl: baseUrl, queryParameters: {
       "client_id": clientId,
       "client_secret": clientSecret,
       "redirect_uri": redirectUri,
@@ -62,8 +66,10 @@ class Auth implements AuthImp {
       {required String clientId,
       required String clientSecret,
       required String refreshToken,
+      String? baseUrl,
       String grantType = "refresh_token"}) async {
-    final data = await _dioClient.post("/oauth/token", queryParameters: {
+    final data = await _dioClient
+        .post("/oauth/token", baseUrl: baseUrl, queryParameters: {
       "client_id": clientId,
       "client_secret": clientSecret,
       "refresh_token": refreshToken,

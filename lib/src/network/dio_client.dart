@@ -55,6 +55,7 @@ class DioClient {
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(
     String uri, {
+    String? baseUrl,
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -63,6 +64,9 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
+      if (baseUrl != null) {
+        _dio.options.baseUrl = baseUrl;
+      }
       final Response response = await _dio.post(
         uri,
         data: data,
