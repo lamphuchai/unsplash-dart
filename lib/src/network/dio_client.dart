@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import '../exceptions/unsplash_exception.dart';
 
-
 class DioClient {
   DioClient(String clientId) {
     _dio = Dio(BaseOptions(
@@ -30,7 +29,7 @@ class DioClient {
       );
       if (response.statusCode != null) {
         final statusCode = response.statusCode;
-        if (200 <= statusCode! && statusCode < 300) {
+        if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
         throw throw UnsplashException.fromCode(statusCode);
@@ -75,7 +74,7 @@ class DioClient {
       );
       if (response.statusCode != null) {
         final statusCode = response.statusCode;
-        if (200 <= statusCode! && statusCode < 300) {
+        if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
         throw throw UnsplashException.fromCode(statusCode);
@@ -120,7 +119,7 @@ class DioClient {
       );
       if (response.statusCode != null) {
         final statusCode = response.statusCode;
-        if (200 <= statusCode! && statusCode < 300) {
+        if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
         throw throw UnsplashException.fromCode(statusCode);
@@ -163,7 +162,7 @@ class DioClient {
       );
       if (response.statusCode != null) {
         final statusCode = response.statusCode;
-        if (200 <= statusCode! && statusCode < 300) {
+        if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
         throw throw UnsplashException.fromCode(statusCode);

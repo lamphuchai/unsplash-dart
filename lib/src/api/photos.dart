@@ -12,11 +12,11 @@ abstract class PhotosAbs {
     PhotosOrderBy orderBy = PhotosOrderBy.latest,
   });
 
-  Future<Photo> photoById({
+  Future<Photo> getPhotoById({
     required String id,
   });
 
-  Future<Photo> randomPhoto(
+  Future<Photo> getRandomPhoto(
       {List<String> collections = const [],
       List<String> topics = const [],
       String? username,
@@ -24,7 +24,7 @@ abstract class PhotosAbs {
       Orientation? orientation,
       ContentFilter contentFilter = ContentFilter.low});
 
-  Future<List<Photo>> randomPhotos(
+  Future<List<Photo>> getRandomPhotos(
       {List<String> collections = const [],
       List<String> topics = const [],
       String? username,
@@ -76,7 +76,7 @@ class Photos extends PhotosAbs {
   }
 
   @override
-  Future<Photo> photoById({required String id}) async {
+  Future<Photo> getPhotoById({required String id}) async {
     final photo = await _dioClient.get('/photos/$id', queryParameters: {
       "id": id,
     });
@@ -84,7 +84,7 @@ class Photos extends PhotosAbs {
   }
 
   @override
-  Future<Photo> randomPhoto({
+  Future<Photo> getRandomPhoto({
     List<String>? collections,
     List<String>? topics,
     String? username,
@@ -104,7 +104,7 @@ class Photos extends PhotosAbs {
   }
 
   @override
-  Future<List<Photo>> randomPhotos(
+  Future<List<Photo>> getRandomPhotos(
       {List<String>? collections,
       List<String>? topics,
       String? username,

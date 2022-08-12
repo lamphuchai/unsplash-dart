@@ -6,16 +6,16 @@ import '../network/dio_client.dart';
 abstract class CollectionsAbs {
   Future<List<Collection>> getCollections({int page = 1, int perPage = 10});
 
-  Future<Collection> collectionById(
+  Future<Collection> getCollectionById(
       {required String id, int page = 1, int perPage = 10});
 
-  Future<List<Photo>> photosInCollectionById(
+  Future<List<Photo>> getPhotosByCollection(
       {required String id,
       int page = 1,
       int perPage = 10,
       Orientation? orientation});
 
-  Future<List<Collection>> relatedCollectionsById({
+  Future<List<Collection>> getRelatedCollections({
     required String id,
   });
 
@@ -66,7 +66,7 @@ class Collections extends CollectionsAbs {
   }
 
   @override
-  Future<Collection> collectionById(
+  Future<Collection> getCollectionById(
       {required String id, int page = 1, int perPage = 10}) async {
     final data = await _dioClient.get('/collections/$id',
         queryParameters: {"page": page, "per_page": perPage});
@@ -75,7 +75,7 @@ class Collections extends CollectionsAbs {
   }
 
   @override
-  Future<List<Photo>> photosInCollectionById(
+  Future<List<Photo>> getPhotosByCollection(
       {required String id,
       int page = 1,
       int perPage = 10,
@@ -93,7 +93,7 @@ class Collections extends CollectionsAbs {
   }
 
   @override
-  Future<List<Collection>> relatedCollectionsById({required String id}) async {
+  Future<List<Collection>> getRelatedCollections({required String id}) async {
     final data =
         await _dioClient.get('/collections/$id/related', queryParameters: {});
     return (data as List)

@@ -16,9 +16,20 @@ void main() {
 
   group("get photos", () {
     test("empty", () async {
-      when(photosApi.getPhotos()).thenAnswer((realInvocation) async => []);
-
-      expect(await photosApi.getPhotos(), isEmpty);
+      // when(photosApi.getPhotos()).thenAnswer((realInvocation) async => []);
+      List<String> fullScope = [
+        "public",
+        "read_user",
+        "write_user",
+        "read_photos",
+        "write_photos",
+        "write_likes",
+        "write_followers",
+        "read_collections",
+        "write_collections",
+      ];
+      print(fullScope.join("+"));
+      // expect(await photosApi.getPhotos(), isEmpty);
     });
     test("success", () async {
       when(photosApi.getPhotos())
