@@ -1,7 +1,7 @@
 import '../network/dio_client.dart';
 
 abstract class AuthImp {
-  Future<Uri> getUriLogin(
+  Uri getUriLogin(
       {required String clientId,
       required String redirectUri,
       String responseType = "code",
@@ -44,11 +44,11 @@ class Auth implements AuthImp {
   }
 
   @override
-  Future<Uri> getUriLogin(
+  Uri getUriLogin(
       {required String clientId,
       required String redirectUri,
       String responseType = "code",
-      required String scope}) async {
+      required String scope}) {
     return Uri.https("unsplash.com", "/oauth/authorize", {
       "client_id": clientId,
       "redirect_uri": redirectUri,
