@@ -33,17 +33,17 @@ class Auth implements AuthImp {
     required String clientSecret,
     required String redirectUri,
     required String code,
-    String? baseUrl,
     String grantType = "authorization_code",
   }) async {
-    final data = await _dioClient
-        .post("/oauth/token", baseUrl: baseUrl, queryParameters: {
-      "client_id": clientId,
-      "client_secret": clientSecret,
-      "redirect_uri": redirectUri,
-      "code": code,
-      "grant_type": grantType
-    });
+    final data = await _dioClient.post("/oauth/token",
+        baseUrl: "https://unsplash.com",
+        queryParameters: {
+          "client_id": clientId,
+          "client_secret": clientSecret,
+          "redirect_uri": redirectUri,
+          "code": code,
+          "grant_type": grantType
+        });
     return data;
   }
 
@@ -66,15 +66,15 @@ class Auth implements AuthImp {
       {required String clientId,
       required String clientSecret,
       required String refreshToken,
-      String? baseUrl,
       String grantType = "refresh_token"}) async {
-    final data = await _dioClient
-        .post("/oauth/token", baseUrl: baseUrl, queryParameters: {
-      "client_id": clientId,
-      "client_secret": clientSecret,
-      "refresh_token": refreshToken,
-      "grant_type": grantType
-    });
+    final data = await _dioClient.post("/oauth/token",
+        baseUrl: "https://unsplash.com",
+        queryParameters: {
+          "client_id": clientId,
+          "client_secret": clientSecret,
+          "refresh_token": refreshToken,
+          "grant_type": grantType
+        });
     return data;
   }
 }
