@@ -4,16 +4,16 @@ abstract class AuthImp {
   Future<Uri> getUriLogin(
       {required String clientId,
       required String redirectUri,
-      required String responseType,
+      String responseType = "code",
       required String scope});
 
-  Future<Map<String, dynamic>> getToken(
-      {required String clientId,
-      required String clientSecret,
-      required String redirectUri,
-      required String code,
-      String grantType = "authorization_code",
-    });
+  Future<Map<String, dynamic>> getToken({
+    required String clientId,
+    required String clientSecret,
+    required String redirectUri,
+    required String code,
+    String grantType = "authorization_code",
+  });
   Future<Map<String, dynamic>> refreshToken({
     required String clientId,
     required String clientSecret,
@@ -26,13 +26,13 @@ class Auth implements AuthImp {
   Auth(this._dioClient);
   final DioClient _dioClient;
   @override
-  Future<Map<String, dynamic>> getToken(
-      {required String clientId,
-      required String clientSecret,
-      required String redirectUri,
-      required String code,
-      String grantType = "authorization_code",
-     }) async {
+  Future<Map<String, dynamic>> getToken({
+    required String clientId,
+    required String clientSecret,
+    required String redirectUri,
+    required String code,
+    String grantType = "authorization_code",
+  }) async {
     final data = await _dioClient.post("/oauth/token", queryParameters: {
       "client_id": clientId,
       "client_secret": clientSecret,
@@ -47,7 +47,7 @@ class Auth implements AuthImp {
   Future<Uri> getUriLogin(
       {required String clientId,
       required String redirectUri,
-      required String responseType,
+      String responseType = "code",
       required String scope}) async {
     return Uri.https("unsplash.com", "/oauth/authorize", {
       "client_id": clientId,
