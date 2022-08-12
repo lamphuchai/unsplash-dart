@@ -13,7 +13,7 @@ abstract class AuthImp {
       required String redirectUri,
       required String code,
       String grantType = "authorization_code",
-      required String scope});
+    });
   Future<Map<String, dynamic>> refreshToken({
     required String clientId,
     required String clientSecret,
@@ -32,7 +32,7 @@ class Auth implements AuthImp {
       required String redirectUri,
       required String code,
       String grantType = "authorization_code",
-      required String scope}) async {
+     }) async {
     final data = await _dioClient.post("/oauth/token", queryParameters: {
       "client_id": clientId,
       "client_secret": clientSecret,
