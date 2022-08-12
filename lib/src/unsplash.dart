@@ -37,7 +37,7 @@ class Unsplash {
   Topics get topics => _topics;
   Stats get stats => _stats;
 
-  Future<Map<String, dynamic>> clientRateLimit() async {
+  Future<Map<String, dynamic>?> clientRateLimit() async {
     if (_clientId == null) {
       throw const UnsplashException(message: "Do not clientId");
     }
@@ -45,8 +45,9 @@ class Unsplash {
       final data = await Dio().get("https://api.unsplash.com/photos/random",
           queryParameters: {"client_id": _clientId});
       final rateLimit = {
-        "limit": data.headers.value("X-Ratelimit-Limit"),
-        "remaining": data.headers.value("X-Ratelimit-Remaining")
+        "client_rateLimit_limit": data.headers.value("X-Ratelimit-Limit"),
+        "client_rateLimit_remaining":
+            data.headers.value("X-Ratelimit-Remaining")
       };
       return rateLimit;
     } catch (e) {
