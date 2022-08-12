@@ -3,8 +3,6 @@ import 'dart:convert';
 
 import 'models.dart';
 
-
-
 class Collection {
   final String id;
   final String title;
@@ -22,7 +20,7 @@ class Collection {
   final User user;
   final Photo? coverPhoto;
   final List<PreviewPhotos> previewPhotos;
-  final Mate? mate;
+  final Meta? mate;
   Collection({
     required this.id,
     required this.title,
@@ -60,7 +58,7 @@ class Collection {
     User? user,
     Photo? coverPhoto,
     List<PreviewPhotos>? previewPhotos,
-    Mate? mate,
+    Meta? mate,
   }) {
     return Collection(
       id: id ?? this.id,
@@ -113,11 +111,11 @@ class Collection {
       publishedAt: map['published_at'],
       lastCollectedAt: map['last_collected_at'],
       updatedAt: map['updated_at'],
-      curated: map['curated'] as bool,
-      featured: map['featured'] as bool,
-      totalPhotos: map['total_photos'] as int,
-      private: map['private'] as bool,
-      shareKey: map['share_key'] as String,
+      curated: map['curated'],
+      featured: map['featured'],
+      totalPhotos: map['total_photos'],
+      private: map['private'],
+      shareKey: map['share_key'],
       tags: List<Tag>.from(
         (map['tags'] as List).map<Tag>(
           (x) => Tag.fromMap(x as Map<String, dynamic>),
@@ -134,8 +132,8 @@ class Collection {
               (x) => PreviewPhotos.fromMap(x as Map<String, dynamic>),
             ))
           : [],
-      mate: map['mate'] != null
-          ? Mate.fromMap(map['mate'] as Map<String, dynamic>)
+      mate: map['meta'] != null
+          ? Meta.fromMap(map['meta'] as Map<String, dynamic>)
           : null,
     );
   }
