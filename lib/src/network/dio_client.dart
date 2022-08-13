@@ -32,7 +32,7 @@ class DioClient {
         if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
-        throw throw UnsplashException.fromCode(statusCode);
+        throw UnsplashException.fromCode(statusCode);
       }
       throw UnsplashException(message: response.data.toString());
     } on DioError catch (error) {
@@ -81,7 +81,7 @@ class DioClient {
         if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
-        throw throw UnsplashException.fromCode(statusCode);
+        throw UnsplashException.fromCode(statusCode);
       }
       throw UnsplashException(message: response.data.toString());
     } on DioError catch (error) {
@@ -126,7 +126,7 @@ class DioClient {
         if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
-        throw throw UnsplashException.fromCode(statusCode);
+        throw UnsplashException.fromCode(statusCode);
       }
       throw UnsplashException(message: response.data.toString());
     } on DioError catch (error) {
@@ -169,7 +169,7 @@ class DioClient {
         if (statusCode! >= 200 && statusCode < 300) {
           return response.data;
         }
-        throw throw UnsplashException.fromCode(statusCode);
+        throw UnsplashException.fromCode(statusCode);
       }
       throw UnsplashException(message: response.data.toString());
     } on DioError catch (error) {
