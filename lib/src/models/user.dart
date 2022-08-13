@@ -25,7 +25,7 @@ class User {
   final bool? forHire;
   final bool? followedByUser;
   final List<Photo>? photos;
-  final Map<String, dynamic> tags;
+  final Map<String, dynamic>? tags;
   final int? followersCount;
   final int? followingCount;
   final bool? allowMessages;
@@ -54,7 +54,7 @@ class User {
       this.social,
       this.followedByUser,
       this.photos,
-      required this.tags,
+      this.tags,
       this.followersCount,
       this.followingCount,
       this.allowMessages,
