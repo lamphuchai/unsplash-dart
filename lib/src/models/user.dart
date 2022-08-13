@@ -119,7 +119,7 @@ class User {
       allowMessages: json['allow_messages'],
       numericId: json['numeric_id'],
       downloads: json['downloads'],
-      meta: json['meta'] != null ? Meta.fromJson(json['meta']) : null,
+      meta: json['meta'] != null ? Meta.fromMap(json['meta']) : null,
     );
   }
 
