@@ -3,12 +3,6 @@ import 'package:dio/dio.dart';
 import '../network/dio_client.dart';
 
 abstract class AuthImp {
-  Uri getUriLogin(
-      {required String clientId,
-      required String redirectUri,
-      String responseType = "code",
-      required String scope});
-
   Future<Map<String, dynamic>> getToken({
     required String clientId,
     required String clientSecret,
@@ -44,20 +38,6 @@ class Auth implements AuthImp {
       "grant_type": grantType
     });
     return data;
-  }
-
-  @override
-  Uri getUriLogin(
-      {required String clientId,
-      required String redirectUri,
-      String responseType = "code",
-      required String scope}) {
-    return Uri.https("unsplash.com", "/oauth/authorize", {
-      "client_id": clientId,
-      "redirect_uri": redirectUri,
-      "response_type": responseType,
-      "scope": scope
-    });
   }
 
   @override
