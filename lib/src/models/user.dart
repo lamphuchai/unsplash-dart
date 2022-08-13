@@ -25,7 +25,7 @@ class User {
   final bool? forHire;
   final bool? followedByUser;
   final List<Photo>? photos;
-  final List<Tag> tags;
+  final Map<String, dynamic> tags;
   final int? followersCount;
   final int? followingCount;
   final bool? allowMessages;
@@ -51,7 +51,7 @@ class User {
       required this.totalPhotos,
       required this.acceptedTos,
       this.forHire,
-       this.social,
+      this.social,
       this.followedByUser,
       this.photos,
       required this.tags,
@@ -113,9 +113,7 @@ class User {
               .map((photo) => Photo.fromMap(photo))
               .toList()
           : [],
-      tags: json['tags'] != null
-          ? (json['tags'] as List).map((photo) => Tag.fromMap(photo)).toList()
-          : [],
+      tags: json['tags'],
       followersCount: json['followers_count'],
       followingCount: json['following_count'],
       allowMessages: json['allow_messages'],
@@ -157,7 +155,7 @@ class User {
     bool? forHire,
     bool? followedByUser,
     List<Photo>? photos,
-    List<Tag>? tags,
+    Map<String, dynamic>? tags,
     int? followersCount,
     int? followingCount,
     bool? allowMessages,
@@ -197,40 +195,3 @@ class User {
     );
   }
 }
-
-
-
-
-
-  // factory User.fromMap(Map<String, dynamic> map) {
-  //   return User(
-  //     map['id'] as String,
-  //     map['updatedAt'] as String,
-  //     map['username'] as String,
-  //     map['name'] as String,
-  //     ProfileImage.fromMap(map['profileImage'] as Map<String,dynamic>),
-  //     Links.fromMap(map['links'] as Map<String,dynamic>),
-  //     map['totalCollections'] as int,
-  //     map['totalLikes'] as int,
-  //     map['totalPhotos'] as int,
-  //     map['acceptedTos'] as bool,
-  //     Social.fromMap(map['social'] as Map<String,dynamic>),
-  //     map['firstName'] != null ? map['firstName'] as String : null,
-  //     map['lastName'] != null ? map['lastName'] as String : null,
-  //     map['twitterUsername'] != null ? map['twitterUsername'] as String : null,
-  //     map['portfolioUrl'] != null ? map['portfolioUrl'] as String : null,
-  //     map['bio'] != null ? map['bio'] as String : null,
-  //     map['location'] != null ? map['location'] as String : null,
-  //     map['instagramUsername'] != null ? map['instagramUsername'] as String : null,
-  //     map['forHire'] != null ? map['forHire'] as bool : null,
-  //     map['followedByUser'] != null ? map['followedByUser'] as bool : null,
-  //     map['photos'] != null ? List<Photo>.from((map['photos'] as List<int>).map<Photo?>((x) => Photo.fromMap(x as Map<String,dynamic>),),) : null,
-  //     map['tags'] != null ? Tag.fromMap(map['tags'] as Map<String,dynamic>) : null,
-  //     map['followersCount'] != null ? map['followersCount'] as int : null,
-  //     map['followingCount'] != null ? map['followingCount'] as int : null,
-  //     map['allowMessages'] != null ? map['allowMessages'] as bool : null,
-  //     map['numericId'] != null ? map['numericId'] as int : null,
-  //     map['downloads'] != null ? map['downloads'] as int : null,
-  //     map['meta'] != null ? Meta.fromMap(map['meta'] as Map<String,dynamic>) : null,
-  //   );
-  // }
