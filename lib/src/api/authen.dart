@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '../network/dio_client.dart';
 
 abstract class AuthImp {
@@ -23,8 +25,8 @@ abstract class AuthImp {
 }
 
 class Auth implements AuthImp {
-  Auth(this._dioClient);
-  final DioClient _dioClient;
+  Auth();
+  final DioClient _dioClient = DioClient.auth();
   @override
   Future<Map<String, dynamic>> getToken({
     required String clientId,
@@ -33,15 +35,14 @@ class Auth implements AuthImp {
     required String code,
     String grantType = "authorization_code",
   }) async {
-    final data = await _dioClient.post("/oauth/token",
-        baseUrl: "https://unsplash.com",
-        queryParameters: {
-          "client_id": clientId,
-          "client_secret": clientSecret,
-          "redirect_uri": redirectUri,
-          "code": code,
-          "grant_type": grantType
-        });
+    final data = await _dioClient
+        .post("/oauth/token", options: Options(), queryParameters: {
+      "client_id": clientId,
+      "client_secret": clientSecret,
+      "redirect_uri": redirectUri,
+      "code": code,
+      "grant_type": grantType
+    });
     return data;
   }
 
@@ -65,14 +66,12 @@ class Auth implements AuthImp {
       required String clientSecret,
       required String refreshToken,
       String grantType = "refresh_token"}) async {
-    final data = await _dioClient.post("/oauth/token",
-        baseUrl: "https://unsplash.com",
-        queryParameters: {
-          "client_id": clientId,
-          "client_secret": clientSecret,
-          "refresh_token": refreshToken,
-          "grant_type": grantType
-        });
+    final data = await _dioClient.post("/oauth/token", queryParameters: {
+      "client_id": clientId,
+      "client_secret": clientSecret,
+      "refresh_token": refreshToken,
+      "grant_type": grantType
+    });
     return data;
   }
 }

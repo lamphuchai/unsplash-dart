@@ -18,7 +18,7 @@ class Unsplash {
   void createApi(String clientId) {
     _clientId = clientId;
     final dioClient = DioClient(clientId);
-    _auth = Auth(dioClient);
+    _auth = Auth();
     _currentUser = CurrentUser(dioClient);
     _users = Users(dioClient);
     _photos = Photos(dioClient);

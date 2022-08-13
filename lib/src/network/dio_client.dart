@@ -9,6 +9,11 @@ class DioClient {
         baseUrl: "https://api.unsplash.com",
         headers: {"Authorization": 'Client-ID $clientId'}));
   }
+  DioClient.auth() {
+    _dio = Dio(BaseOptions(
+      baseUrl: "https://unsplash.com",
+    ));
+  }
   late Dio _dio;
 
   // Get:-----------------------------------------------------------------------
@@ -55,7 +60,6 @@ class DioClient {
   // Post:----------------------------------------------------------------------
   Future<dynamic> post(
     String uri, {
-    String? baseUrl,
     data,
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -64,9 +68,6 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      if (baseUrl != null) {
-        _dio.options.baseUrl = baseUrl;
-      }
       final Response response = await _dio.post(
         uri,
         data: data,

@@ -1,12 +1,9 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:unsplash_dart/unsplash_dart.dart';
-
 import '../network/dio_client.dart';
 
 abstract class UserImp {
-
   Stream<User?> get userChange;
   Future<User?> getCurrentUser(String accessToken);
   Future<bool> updateCurrentUser(
@@ -33,9 +30,12 @@ class CurrentUser implements UserImp {
   Future<User?> getCurrentUser(String accessToken) async {
     final data = await _dioClient.get('/me',
         options: Options(headers: {"Authorization": 'Bearer $accessToken'}));
-    final user = User.fromMap(data);
-    _controller.add(user);
-    return user;
+    if (data is Map) {
+      final user = User.fromMap((data as Map<String, dynamic>));
+      _controller.add(user);
+      return user;
+    }
+    return null;
   }
 
   @override
