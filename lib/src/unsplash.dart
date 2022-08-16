@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:unsplash_dart/src/api/api.dart';
-import 'package:unsplash_dart/src/api/current_user.dart';
 import 'package:unsplash_dart/src/exceptions/unsplash_exception.dart';
 import 'package:unsplash_dart/src/network/dio_client.dart';
 
@@ -14,20 +13,24 @@ class Unsplash {
   late final Topics _topics;
   late final Stats _stats;
   late final String? _clientId;
+  late final DioClient _dioClient;
 
   void createApi(String clientId) {
     _clientId = clientId;
-    final dioClient = DioClient(clientId);
+    _dioClient = DioClient(clientId);
     _auth = Auth();
-    _currentUser = CurrentUser(dioClient);
-    _users = Users(dioClient);
-    _photos = Photos(dioClient);
-    _collections = Collections(dioClient);
-    _search = Search(dioClient);
-    _topics = Topics(dioClient);
-    _stats = Stats(dioClient);
+    _currentUser = CurrentUser(_dioClient);
+    _users = Users(_dioClient);
+    _photos = Photos(_dioClient);
+    _collections = Collections(_dioClient);
+    _search = Search(_dioClient);
+    _topics = Topics(_dioClient);
+    _stats = Stats(_dioClient);
   }
 
+  void updateAuthorization({String? clientId, String? accessToken}) =>
+      _dioClient.updateAuthorization(
+          clientId: clientId, accessToken: accessToken);
   Auth get auth => _auth;
   CurrentUser get currentUser => _currentUser;
   Photos get photos => _photos;

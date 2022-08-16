@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
 import 'models.dart';
 
 class Photo {
@@ -169,5 +172,61 @@ class Photo {
   @override
   String toString() {
     return 'Photo(id: $id, createdAt: $createdAt, updatedAt: $updatedAt, promotedAt: $promotedAt, width: $width, height: $height, color: $color, blurHash: $blurHash, description: $description, altDescription: $altDescription, urls: $urls, links: $links, categories: $categories, likes: $likes, likedByUser: $likedByUser, currentUserCollections: $currentUserCollections, sponsorship: $sponsorship, topicSubmissions: $topicSubmissions, user: $user)';
+  }
+
+  @override
+  bool operator ==(covariant Photo other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt &&
+        other.promotedAt == promotedAt &&
+        other.width == width &&
+        other.height == height &&
+        other.color == color &&
+        other.blurHash == blurHash &&
+        other.downloads == downloads &&
+        other.description == description &&
+        other.altDescription == altDescription &&
+        other.urls == urls &&
+        other.links == links &&
+        other.views == views &&
+        listEquals(other.categories, categories) &&
+        other.likes == likes &&
+        other.likedByUser == likedByUser &&
+        listEquals(other.currentUserCollections, currentUserCollections) &&
+        other.sponsorship == sponsorship &&
+        other.topicSubmissions == topicSubmissions &&
+        other.user == user &&
+        other.exif == exif &&
+        listEquals(other.tags, tags);
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        createdAt.hashCode ^
+        updatedAt.hashCode ^
+        promotedAt.hashCode ^
+        width.hashCode ^
+        height.hashCode ^
+        color.hashCode ^
+        blurHash.hashCode ^
+        downloads.hashCode ^
+        description.hashCode ^
+        altDescription.hashCode ^
+        urls.hashCode ^
+        links.hashCode ^
+        views.hashCode ^
+        categories.hashCode ^
+        likes.hashCode ^
+        likedByUser.hashCode ^
+        currentUserCollections.hashCode ^
+        sponsorship.hashCode ^
+        topicSubmissions.hashCode ^
+        user.hashCode ^
+        exif.hashCode ^
+        tags.hashCode;
   }
 }

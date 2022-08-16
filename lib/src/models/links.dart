@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Links {
@@ -79,5 +80,34 @@ class Links {
   @override
   String toString() {
     return 'Links(self: $self, html: $html, download: $download, downloadLocation: $downloadLocation, related: $related, photos: $photos)';
+  }
+
+  @override
+  bool operator ==(covariant Links other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.self == self &&
+      other.html == html &&
+      other.download == download &&
+      other.downloadLocation == downloadLocation &&
+      other.related == related &&
+      other.photos == photos &&
+      other.portfolio == portfolio &&
+      other.following == following &&
+      other.followers == followers;
+  }
+
+  @override
+  int get hashCode {
+    return self.hashCode ^
+      html.hashCode ^
+      download.hashCode ^
+      downloadLocation.hashCode ^
+      related.hashCode ^
+      photos.hashCode ^
+      portfolio.hashCode ^
+      following.hashCode ^
+      followers.hashCode;
   }
 }

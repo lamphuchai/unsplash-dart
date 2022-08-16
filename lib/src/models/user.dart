@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+
 import 'models.dart';
 
 class User {
@@ -20,6 +21,8 @@ class User {
   final String? twitterUsername;
   final String? portfolioUrl;
   final String? bio;
+  final String? email;
+
   final String? location;
   final String? instagramUsername;
   final bool? forHire;
@@ -42,6 +45,7 @@ class User {
       this.twitterUsername,
       this.portfolioUrl,
       this.bio,
+      this.email,
       this.location,
       required this.links,
       required this.profileImage,
@@ -104,6 +108,7 @@ class User {
       twitterUsername: json['twitter_username'],
       portfolioUrl: json['portfolio_url'],
       bio: json['bio'],
+      email: json['email'],
       location: json['location'],
       instagramUsername: json['instagram_username'],
       forHire: json['for_hire'],
@@ -131,67 +136,5 @@ class User {
   @override
   String toString() {
     return 'User(id: $id, updatedAt: $updatedAt, username: $username, name: $name, firstName: $firstName, lastName: $lastName, twitterUsername: $twitterUsername, portfolioUrl: $portfolioUrl, bio: $bio, location: $location, links: $links, profileImage: $profileImage, instagramUsername: $instagramUsername, totalCollections: $totalCollections, totalLikes: $totalLikes, totalPhotos: $totalPhotos, acceptedTos: $acceptedTos, forHire: $forHire, social: $social)';
-  }
-
-  User copyWith({
-    String? id,
-    String? updatedAt,
-    String? username,
-    String? name,
-    ProfileImage? profileImage,
-    Links? links,
-    int? totalCollections,
-    int? totalLikes,
-    int? totalPhotos,
-    bool? acceptedTos,
-    Social? social,
-    String? firstName,
-    String? lastName,
-    String? twitterUsername,
-    String? portfolioUrl,
-    String? bio,
-    String? location,
-    String? instagramUsername,
-    bool? forHire,
-    bool? followedByUser,
-    List<Photo>? photos,
-    Map<String, dynamic>? tags,
-    int? followersCount,
-    int? followingCount,
-    bool? allowMessages,
-    int? numericId,
-    int? downloads,
-    Meta? meta,
-  }) {
-    return User(
-      id: id ?? this.id,
-      updatedAt: updatedAt ?? this.updatedAt,
-      username: username ?? this.username,
-      name: name ?? this.name,
-      profileImage: profileImage ?? this.profileImage,
-      links: links ?? this.links,
-      totalCollections: totalCollections ?? this.totalCollections,
-      totalLikes: totalLikes ?? this.totalLikes,
-      totalPhotos: totalPhotos ?? this.totalPhotos,
-      acceptedTos: acceptedTos ?? this.acceptedTos,
-      social: social ?? this.social,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      twitterUsername: twitterUsername ?? this.twitterUsername,
-      portfolioUrl: portfolioUrl ?? this.portfolioUrl,
-      bio: bio ?? this.bio,
-      location: location ?? this.location,
-      instagramUsername: instagramUsername ?? this.instagramUsername,
-      forHire: forHire ?? this.forHire,
-      followedByUser: followedByUser ?? this.followedByUser,
-      photos: photos ?? this.photos,
-      tags: tags ?? this.tags,
-      followersCount: followersCount ?? this.followersCount,
-      followingCount: followingCount ?? this.followingCount,
-      allowMessages: allowMessages ?? this.allowMessages,
-      numericId: numericId ?? this.numericId,
-      downloads: downloads ?? this.downloads,
-      meta: meta ?? this.meta,
-    );
   }
 }

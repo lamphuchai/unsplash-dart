@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Exif {
@@ -45,5 +46,28 @@ class Exif {
   @override
   String toString() {
     return 'Exif(make: $make, model: $model, exposureTime: $exposureTime, aperture: $aperture, focalLength: $focalLength, isoSpeedEatings: $isoSpeedEatings)';
+  }
+
+  @override
+  bool operator ==(covariant Exif other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.make == make &&
+      other.model == model &&
+      other.exposureTime == exposureTime &&
+      other.aperture == aperture &&
+      other.focalLength == focalLength &&
+      other.isoSpeedEatings == isoSpeedEatings;
+  }
+
+  @override
+  int get hashCode {
+    return make.hashCode ^
+      model.hashCode ^
+      exposureTime.hashCode ^
+      aperture.hashCode ^
+      focalLength.hashCode ^
+      isoSpeedEatings.hashCode;
   }
 }

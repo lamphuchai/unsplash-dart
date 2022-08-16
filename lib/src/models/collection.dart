@@ -17,6 +17,7 @@ class Collection {
   final String shareKey;
   final List<Tag> tags;
   final Links links;
+  final bool? likedByUser;
   final User user;
   final Photo? coverPhoto;
   final List<PreviewPhotos> previewPhotos;
@@ -25,6 +26,7 @@ class Collection {
     required this.id,
     required this.title,
     this.description,
+    this.likedByUser,
     required this.publishedAt,
     required this.lastCollectedAt,
     required this.updatedAt,
@@ -59,26 +61,27 @@ class Collection {
     Photo? coverPhoto,
     List<PreviewPhotos>? previewPhotos,
     Meta? mate,
+    bool? likedByUser,
   }) {
     return Collection(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      publishedAt: publishedAt ?? this.publishedAt,
-      lastCollectedAt: lastCollectedAt ?? this.lastCollectedAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      curated: curated ?? this.curated,
-      featured: featured ?? this.featured,
-      totalPhotos: totalPhotos ?? this.totalPhotos,
-      private: private ?? this.private,
-      shareKey: shareKey ?? this.shareKey,
-      tags: tags ?? this.tags,
-      links: links ?? this.links,
-      user: user ?? this.user,
-      coverPhoto: coverPhoto ?? this.coverPhoto,
-      previewPhotos: previewPhotos ?? this.previewPhotos,
-      mate: mate ?? this.mate,
-    );
+        id: id ?? this.id,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        publishedAt: publishedAt ?? this.publishedAt,
+        lastCollectedAt: lastCollectedAt ?? this.lastCollectedAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        curated: curated ?? this.curated,
+        featured: featured ?? this.featured,
+        totalPhotos: totalPhotos ?? this.totalPhotos,
+        private: private ?? this.private,
+        shareKey: shareKey ?? this.shareKey,
+        tags: tags ?? this.tags,
+        links: links ?? this.links,
+        user: user ?? this.user,
+        coverPhoto: coverPhoto ?? this.coverPhoto,
+        previewPhotos: previewPhotos ?? this.previewPhotos,
+        mate: mate ?? this.mate,
+        likedByUser: likedByUser ?? this.likedByUser);
   }
 
   Map<String, dynamic> toMap() {
@@ -116,6 +119,7 @@ class Collection {
       totalPhotos: map['total_photos'],
       private: map['private'],
       shareKey: map['share_key'],
+      likedByUser: map["liked_by_user"],
       tags: List<Tag>.from(
         (map['tags'] as List).map<Tag>(
           (x) => Tag.fromMap(x as Map<String, dynamic>),

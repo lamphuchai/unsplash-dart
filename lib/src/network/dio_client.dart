@@ -16,6 +16,14 @@ class DioClient {
   }
   late Dio _dio;
 
+  void updateAuthorization({String? clientId, String? accessToken}) {
+    if (clientId != null) {
+      _dio.options.headers = {"Authorization": 'Client-ID $clientId'};
+    } else if (accessToken != null) {
+      _dio.options.headers = {"Authorization": 'Bearer $accessToken'};
+    }
+  }
+
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(
     String uri, {
