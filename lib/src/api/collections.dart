@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import '../constants/enum.dart';
 import '../models/models.dart';
 import '../network/dio_client.dart';
@@ -22,33 +21,23 @@ abstract class CollectionsAbs {
   // USING AUTHEN ACCESS_TOKEN LOGIN USER
 
   Future<Collection> createCollection(
-      {required String accessToken,
-      required String title,
-      String? description,
-      bool? private});
+      {required String title, String? description, bool? private});
 
   Future<Collection> updateCollection(
-      {required String id,
-      required String accessToken,
-      String? title,
-      String? description,
-      bool? private});
+      {required String id, String? title, String? description, bool? private});
 
   Future<bool> deleteCollection({
     required String id,
-    required String accessToken,
   });
 
   Future<Map<String, dynamic>> addPhotoCollection({
     required String collectionId,
     required String photoId,
-    required String accessToken,
   });
 
   Future<Map<String, dynamic>> removePhotoCollection({
     required String collectionId,
     required String photoId,
-    required String accessToken,
   });
 }
 
@@ -103,17 +92,12 @@ class Collections extends CollectionsAbs {
 
   @override
   Future<Collection> createCollection(
-      {required String accessToken,
-      required String title,
-      String? description,
-      bool? private}) async {
-    final data = await _dioClient.post('/collections',
-        options: Options(headers: {"Authorization": 'Bearer $accessToken'}),
-        queryParameters: {
-          "title": title,
-          "description": description,
-          "private": private
-        });
+      {required String title, String? description, bool? private}) async {
+    final data = await _dioClient.post('/collections', queryParameters: {
+      "title": title,
+      "description": description,
+      "private": private
+    });
 
     return Collection.fromMap(data);
   }
@@ -121,48 +105,40 @@ class Collections extends CollectionsAbs {
   @override
   Future<Collection> updateCollection(
       {required String id,
-      required String accessToken,
       String? title,
       String? description,
       bool? private}) async {
-    final data = await _dioClient.put('/collections/$id',
-        options: Options(headers: {"Authorization": 'Bearer $accessToken'}),
-        queryParameters: {
-          "title": title,
-          "description": description,
-          "private": private
-        });
+    final data = await _dioClient.put('/collections/$id', queryParameters: {
+      "title": title,
+      "description": description,
+      "private": private
+    });
     return Collection.fromMap(data);
   }
 
   @override
-  Future<bool> deleteCollection(
-      {required String id, required String accessToken}) async {
-    await _dioClient.delete('/collections/$id',
-        options: Options(headers: {"Authorization": 'Bearer $accessToken'}),
-        queryParameters: {"id": id});
+  Future<bool> deleteCollection({required String id}) async {
+    await _dioClient.delete('/collections/$id', queryParameters: {"id": id});
     return true;
   }
 
   @override
-  Future<Map<String, dynamic>> addPhotoCollection(
-      {required String collectionId,
-      required String photoId,
-      required String accessToken}) async {
+  Future<Map<String, dynamic>> addPhotoCollection({
+    required String collectionId,
+    required String photoId,
+  }) async {
     final data = await _dioClient.post('/collections/$collectionId/add',
-        options: Options(headers: {"Authorization": 'Bearer $accessToken'}),
         queryParameters: {"collection_id": collectionId, "photo_id": photoId});
 
     return data;
   }
 
   @override
-  Future<Map<String, dynamic>> removePhotoCollection(
-      {required String collectionId,
-      required String photoId,
-      required String accessToken}) async {
+  Future<Map<String, dynamic>> removePhotoCollection({
+    required String collectionId,
+    required String photoId,
+  }) async {
     final data = await _dioClient.delete('/collections/$collectionId/remove',
-        options: Options(headers: {"Authorization": 'Bearer $accessToken'}),
         queryParameters: {"collection_id": collectionId, "photo_id": photoId});
     return data;
   }

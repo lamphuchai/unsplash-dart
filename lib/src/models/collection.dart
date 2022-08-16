@@ -8,7 +8,7 @@ class Collection {
   final String title;
   final String? description;
   final String publishedAt;
-  final String lastCollectedAt;
+  final String? lastCollectedAt;
   final String updatedAt;
   final bool curated;
   final bool featured;
@@ -28,7 +28,7 @@ class Collection {
     this.description,
     this.likedByUser,
     required this.publishedAt,
-    required this.lastCollectedAt,
+    this.lastCollectedAt,
     required this.updatedAt,
     required this.curated,
     required this.featured,
@@ -42,47 +42,6 @@ class Collection {
     required this.previewPhotos,
     this.mate,
   });
-
-  Collection copyWith({
-    String? id,
-    String? title,
-    String? description,
-    String? publishedAt,
-    String? lastCollectedAt,
-    String? updatedAt,
-    bool? curated,
-    bool? featured,
-    int? totalPhotos,
-    bool? private,
-    String? shareKey,
-    List<Tag>? tags,
-    Links? links,
-    User? user,
-    Photo? coverPhoto,
-    List<PreviewPhotos>? previewPhotos,
-    Meta? mate,
-    bool? likedByUser,
-  }) {
-    return Collection(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        description: description ?? this.description,
-        publishedAt: publishedAt ?? this.publishedAt,
-        lastCollectedAt: lastCollectedAt ?? this.lastCollectedAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        curated: curated ?? this.curated,
-        featured: featured ?? this.featured,
-        totalPhotos: totalPhotos ?? this.totalPhotos,
-        private: private ?? this.private,
-        shareKey: shareKey ?? this.shareKey,
-        tags: tags ?? this.tags,
-        links: links ?? this.links,
-        user: user ?? this.user,
-        coverPhoto: coverPhoto ?? this.coverPhoto,
-        previewPhotos: previewPhotos ?? this.previewPhotos,
-        mate: mate ?? this.mate,
-        likedByUser: likedByUser ?? this.likedByUser);
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

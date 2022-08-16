@@ -23,7 +23,7 @@ class Photo {
   final List<String> categories;
   final int likes;
   final bool likedByUser;
-  final List<dynamic> currentUserCollections;
+  final List<String> currentUserCollections;
   final Sponsorship? sponsorship;
   final Map? topicSubmissions;
   final User user;
@@ -76,6 +76,7 @@ class Photo {
       User? user,
       int? downloads,
       int? views,
+      Exif? exif,
       List<Tag>? tags}) {
     return Photo(
         id: id ?? this.id,
@@ -100,7 +101,8 @@ class Photo {
         sponsorship: sponsorship ?? this.sponsorship,
         topicSubmissions: topicSubmissions ?? this.topicSubmissions,
         user: user ?? this.user,
-        tags: tags ?? this.tags);
+        tags: tags ?? this.tags,
+        exif: exif ?? this.exif);
   }
 
   Map<String, dynamic> toMap() {
@@ -151,8 +153,10 @@ class Photo {
         exif: map['exif'] != null ? Exif.fromMap(map['exif']) : null,
         likes: map['likes'] as int,
         likedByUser: map['liked_by_user'] as bool,
-        currentUserCollections: map['current_user_contributions'] != null
-            ? List.from(map['current_user_contributions'])
+        currentUserCollections: map["current_user_collections"] != null
+            ? (map["current_user_collections"] as List)
+                .map((collection) => collection["id"].toString())
+                .toList()
             : [],
         sponsorship: map['sponsorship'] != null
             ? Sponsorship.fromMap(map['sponsorship'])
